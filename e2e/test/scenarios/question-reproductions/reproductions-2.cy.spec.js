@@ -20,6 +20,7 @@ import {
   chartPathWithFillColor,
   openQuestionActions,
   queryBuilderHeader,
+  queryBuilderMain,
   saveQuestion,
   saveSavedQuestion,
   tableHeaderClick,
@@ -29,6 +30,7 @@ import {
   createNativeQuestion,
   createQuestion,
   getNotebookStep,
+  summarize,
 } from "e2e/support/helpers";
 
 const { ORDERS, ORDERS_ID, PRODUCTS, PRODUCTS_ID, PEOPLE } = SAMPLE_DATABASE;
@@ -781,6 +783,34 @@ describe("Custom columns visualization settings", () => {
     });
 
     saveModifiedQuestion();
+  });
+});
+
+describe("issue 12586", () => {
+  beforeEach(() => {
+    restore();
+    cy.signInAsAdmin();
+
+    // simulate failing endpoint
+    cy.intercept("POST", "/api/dataset", request => request.destroy());
+  });
+
+  it("should not cover the error message with run button overlay (metabase#12586)", () => {
+    createQuestion(
+      { query: { "source-table": ORDERS_ID } },
+      { visitQuestion: true },
+    );
+
+    summarize();
+    cy.findAllByTestId("sidebar-right").button("Done").click();
+
+    queryBuilderMain().within(() => {
+      cy.findByText("We're experiencing server issues").should("be.visible");
+
+      // check if element can be interacted with (i.e. is not covered by an overlay)
+      // use rightclick() instead of click() to avoid triggering navigation
+      cy.findByText("admin@metabase.test").rightclick();
+    });
   });
 });
 
