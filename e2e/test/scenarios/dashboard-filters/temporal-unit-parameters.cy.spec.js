@@ -517,6 +517,7 @@ describe("scenarios > dashboard > temporal unit parameters", () => {
         getDashboardCard(0)
           .findByLabelText("Click behavior")
           .click({ force: true });
+        cy.findByTestId("test123");
         sidebar().within(() => {
           cy.log("datetime columns cannot be mapped");
           cy.findByText("Created At").click();

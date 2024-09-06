@@ -260,7 +260,7 @@ describe("scenarios > question > saved", () => {
       visitQuestion(ORDERS_QUESTION_ID);
 
       // eslint-disable-next-line no-unscoped-text-selectors -- deprecated usage
-      cy.findByText("Tax")
+      cy.findByText("Tax123")
         .closest(".test-TableInteractive-headerCellData")
         .as("headerCell")
         .then($cell => {
