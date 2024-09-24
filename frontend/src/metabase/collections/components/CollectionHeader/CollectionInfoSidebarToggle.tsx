@@ -3,14 +3,16 @@ import { useState } from "react";
 import { FixedSizeIcon as Icon } from "metabase/ui";
 import type { Collection } from "metabase-types/api";
 
-import { CollectionSidesheet } from "../CollectionSidesheet/CollectionSidesheet";
+import { CollectionInfoSidebar } from "../CollectionInfoSidebar";
 
 import { CollectionHeaderButton } from "./CollectionHeader.styled";
 
-export const CollectionSidesheetToggle = ({
+export const CollectionInfoSidebarToggle = ({
   collection,
+  onUpdateCollection,
 }: {
   collection: Collection;
+  onUpdateCollection: (entity: Collection, values: Partial<Collection>) => void;
 }) => {
   const [showSidesheet, setShowSidesheet] = useState(false);
   return (
@@ -18,11 +20,13 @@ export const CollectionSidesheetToggle = ({
       <CollectionHeaderButton onClick={() => setShowSidesheet(open => !open)}>
         <Icon name="info" />
       </CollectionHeaderButton>
-      <CollectionSidesheet
-        isOpen={showSidesheet}
-        onClose={() => setShowSidesheet(false)}
-        collection={collection}
-      />
+      {showSidesheet && (
+        <CollectionInfoSidebar
+          onClose={() => setShowSidesheet(false)}
+          collection={collection}
+          onUpdateCollection={onUpdateCollection}
+        />
+      )}
     </>
   );
 };

@@ -11,8 +11,8 @@ import { CollectionMenu } from "../CollectionMenu";
 import CollectionBookmark from "./CollectionBookmark";
 import { CollectionCaption } from "./CollectionCaption";
 import { HeaderActions, HeaderRoot } from "./CollectionHeader.styled";
+import { CollectionInfoSidebarToggle } from "./CollectionInfoSidebarToggle";
 import { CollectionPermissions } from "./CollectionPermissions";
-import { CollectionSidesheetToggle } from "./CollectionSidesheetToggle";
 import CollectionTimeline from "./CollectionTimeline";
 import { CollectionUpload } from "./CollectionUpload";
 
@@ -74,7 +74,10 @@ const CollectionHeader = ({
             onCreateBookmark={onCreateBookmark}
             onDeleteBookmark={onDeleteBookmark}
           />
-          <CollectionSidesheetToggle collection={collection} />
+          <CollectionInfoSidebarToggle
+            collection={collection}
+            onUpdateCollection={onUpdateCollection}
+          />
           {!isInstanceAnalytics && (
             <CollectionMenu
               collection={collection}

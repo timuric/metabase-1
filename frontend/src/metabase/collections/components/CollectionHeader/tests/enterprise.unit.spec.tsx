@@ -113,7 +113,7 @@ describe("Official Collections Header", () => {
     expect(
       await screen.findByText("Make collection official"),
     ).toBeInTheDocument();
-    expect(await getIcon("badge")).toBeInTheDocument();
+    expect(await getIcon("verified_collection")).toBeInTheDocument();
   });
 
   it("should not allow non-admin users to designate official collections", async () => {
@@ -125,7 +125,7 @@ describe("Official Collections Header", () => {
     expect(
       screen.queryByText("Make collection official"),
     ).not.toBeInTheDocument();
-    expect(await queryIcon("badge")).not.toBeInTheDocument();
+    expect(await queryIcon("verified_collection")).not.toBeInTheDocument();
   });
 
   it("should not allow admin users to designate read-only collections as official", async () => {
@@ -140,6 +140,6 @@ describe("Official Collections Header", () => {
     expect(
       screen.queryByText("Make collection official"),
     ).not.toBeInTheDocument();
-    expect(await queryIcon("badge")).not.toBeInTheDocument();
+    expect(await queryIcon("verified_collection")).not.toBeInTheDocument();
   });
 });
