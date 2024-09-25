@@ -159,7 +159,7 @@
   org.eclipse.jetty/jetty-server            ^:antq/exclude                      ; 12.x do not support Java 8
                                             {:mvn/version "11.0.22"}            ; web server
   org.eclipse.jetty.websocket/websocket-jetty-server {:mvn/version "11.0.24"}   ; ring-jetty-adapter needs that
-  org.flatland/ordered                      ^:antq/exclude                      ; conflicts with depstar https://github.com/juxt/tick/issues/170 (nevermind the issue is from another repo)
+  org.flatland/ordered                      ^:antq/exclude                      ; conflicts with depstar https://github.com/juxt/tick/issues/170 (nevermind the issue is from another repo); also see qp.cache.impl for FIXME after upgrade
                                             {:mvn/version "1.15.10"}            ; ordered maps & sets
   org.graalvm.js/js                         ^:antq/exclude                      ; newer GraalVM is not compatible with Java 8
                                             {:mvn/version "22.3.5"}             ; JavaScript engine
