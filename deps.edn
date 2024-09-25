@@ -28,8 +28,8 @@
                                                            slingshot/slingshot]}
   clojure.java-time/clojure.java-time       {:mvn/version "1.4.2"}              ; java.time utilities
   clojurewerkz/quartzite                    {:mvn/version "2.2.0"               ; scheduling library
-                                             :exclusions  [c3p0/c3p0
-                                                           org.quartz-scheduler/quartz]}
+                                             :exclusions  [com.mchange.c3p0/c3p0
+                                                           com.zaxxer/HikariCP-java7]}
   colorize/colorize                         {:mvn/version "0.1.1"               ; string output with ANSI color codes (for logging)
                                              :exclusions  [org.clojure/clojure]}
   com.clearspring.analytics/stream          {:mvn/version "2.9.8"               ; Various sketching algorithms
@@ -171,7 +171,6 @@
                                             {:mvn/version "2.7.10"}             ; MySQL/MariaDB driver
   org.mindrot/jbcrypt                       {:mvn/version "0.4"}                ; Crypto library
   org.postgresql/postgresql                 {:mvn/version "42.7.4"}             ; Postgres driver
-  org.quartz-scheduler/quartz               {:mvn/version "2.3.2"}              ; Quartz job scheduler, provided by quartzite but this is a newer version.
   org.slf4j/slf4j-api                       {:mvn/version "2.0.16"}             ; abstraction for logging frameworks -- allows end user to plug in desired logging framework at deployment time
   org.tcrawley/dynapath                     {:mvn/version "1.1.0"}              ; Dynamically add Jars (e.g. Oracle or Vertica) to classpath
   org.threeten/threeten-extra               {:mvn/version "1.8.0"}              ; extra Java 8 java.time classes like DayOfMonth and Quarter

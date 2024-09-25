@@ -43,8 +43,8 @@
 
 (nippy/extend-thaw :flatland/ordered-map
   [data-input]
-  (ordered-map/ordered-map-reader #_ "FIXME: this is for 0.5.11+" #_ordered-map-reader-clj
-                                  (nippy/thaw-from-in! data-input)))
+  ;; FIXME: this is for 0.5.11+ `ordered-map-reader-clj`
+  (ordered-map/ordered-map-reader (nippy/thaw-from-in! data-input)))
 
 (defn- freeze!
   [^OutputStream os obj]
