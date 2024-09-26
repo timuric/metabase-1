@@ -5,6 +5,7 @@ import type {
 } from "metabase/visualizations/types";
 
 import type { PieChartModel } from "./model/types";
+import { formatValue } from "metabase/lib/formatting";
 
 export interface PieChartFormatters {
   formatMetric: (value: unknown, isCompact?: boolean) => string;
@@ -26,7 +27,7 @@ export function getPieChartFormatters(
   );
 
   const formatMetric = (value: unknown, isCompact: boolean = false) =>
-    renderingContext.formatValue(value, {
+    formatValue(value, {
       ...metricColSettings,
       compact: isCompact,
     });
@@ -43,7 +44,7 @@ export function getPieChartFormatters(
       );
     }
 
-    return renderingContext.formatValue(value, {
+    return formatValue(value, {
       column: metricColSettings.column,
       number_separators: metricColSettings.number_separators as string,
       number_style: "percent",
