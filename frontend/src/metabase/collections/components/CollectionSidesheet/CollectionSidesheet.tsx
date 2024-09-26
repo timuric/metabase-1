@@ -102,11 +102,7 @@ const EditableDescription = ({
   return (
     <Box
       component={EditableText}
-      tabIndex={0}
-      pos="relative"
-      left={-5}
-      lh={1.38}
-      key={collection.id}
+      onChange={handleChangeDescription}
       initialValue={description}
       placeholder={
         !description && !canWrite ? t`No description` : t`Add description`
@@ -115,7 +111,11 @@ const EditableDescription = ({
       isOptional
       isMultiline
       isMarkdown
-      onChange={handleChangeDescription}
+      key={collection.id}
+      pos="relative"
+      left={-5}
+      lh={1.38}
+      tabIndex={0}
       // For a11y, allow typing to activate the textarea
       onKeyDown={(e: React.KeyboardEvent) => {
         if (shouldPassKeyToTextarea(e.key)) {
