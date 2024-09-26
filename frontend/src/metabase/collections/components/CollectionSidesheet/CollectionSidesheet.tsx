@@ -63,7 +63,7 @@ export const CollectionSidesheet = ({
       onClose={onClose}
     >
       <Stack spacing="lg">
-        <SidesheetCard>
+        <SidesheetCard pb="md">
           <Stack spacing="md">
             <Stack spacing="xs">
               <Title lh={1} size="sm" color="text-light">
@@ -75,7 +75,7 @@ export const CollectionSidesheet = ({
               />
             </Stack>
             {collection.authority_level === "official" && (
-              <Group noWrap spacing="sm">
+              <Group noWrap spacing="sm" pb="xs">
                 <Icon {...iconProps} />
                 <Text lh={1}>{t`Official collection`}</Text>
               </Group>
