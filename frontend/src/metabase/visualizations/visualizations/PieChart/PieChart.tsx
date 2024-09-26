@@ -62,8 +62,8 @@ export function PieChart(props: VisualizationProps) {
     [rawSeries, settings, hiddenSlices, renderingContext, showWarning],
   );
   const formatters = useMemo(
-    () => getPieChartFormatters(chartModel, settings, renderingContext),
-    [chartModel, settings, renderingContext],
+    () => getPieChartFormatters(chartModel, settings),
+    [chartModel, settings],
   );
   const option = useMemo(
     () => ({

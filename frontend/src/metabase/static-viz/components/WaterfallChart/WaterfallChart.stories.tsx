@@ -1,7 +1,6 @@
 import type { ComponentStory } from "@storybook/react";
 
 import { color } from "metabase/lib/colors";
-import { formatValue } from "metabase/lib/formatting";
 import { data } from "metabase/static-viz/components/WaterfallChart/stories-data";
 import {
   measureTextHeight,
@@ -27,7 +26,6 @@ const Template: ComponentStory<typeof StaticVisualization> = args => {
 
 const renderingContext: RenderingContext = {
   getColor: color,
-  formatValue: formatValue,
   measureText: (text, style) =>
     measureTextWidth(text, Number(style.size), Number(style.weight)),
   measureTextHeight: (_, style) => measureTextHeight(Number(style.size)),
