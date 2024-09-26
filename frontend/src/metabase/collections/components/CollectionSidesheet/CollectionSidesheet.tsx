@@ -81,7 +81,7 @@ export const CollectionSidesheet = ({
             />
             <Group noWrap spacing="sm">
               <Icon {...iconProps} />
-              <Text lh={1}>{t`Official Collection`}</Text>
+              <Text lh={1}>{t`Official collection`}</Text>
             </Group>
           </SidesheetCard>
         )}
