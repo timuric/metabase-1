@@ -1,7 +1,7 @@
 import type { ComponentStory } from "@storybook/react";
 
 import { color } from "metabase/lib/colors";
-import { formatStaticValue } from "metabase/static-viz/lib/format";
+import { formatValue } from "metabase/lib/formatting";
 import {
   measureTextHeight,
   measureTextWidth,
@@ -27,7 +27,7 @@ const Template: ComponentStory<typeof FunnelBarChart> = args => {
 
 const renderingContext: RenderingContext = {
   getColor: color,
-  formatValue: formatStaticValue as any,
+  formatValue: formatValue as any,
   measureText: (text, style) =>
     measureTextWidth(text, Number(style.size), Number(style.weight)),
   measureTextHeight: (_, style) => measureTextHeight(Number(style.size)),
