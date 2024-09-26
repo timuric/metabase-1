@@ -63,25 +63,25 @@ export const CollectionSidesheet = ({
       onClose={onClose}
     >
       <Stack spacing="lg">
-        {collection.authority_level === "official" && (
-          <SidesheetCard>
-            <Stack spacing="md">
-              <Stack spacing="xs">
-                <Title lh={1} size="sm" color="text-light">
-                  {t`Description`}
-                </Title>
-                <EditableDescription
-                  collection={collection}
-                  handleChangeDescription={handleChangeDescription}
-                />
-              </Stack>
+        <SidesheetCard>
+          <Stack spacing="md">
+            <Stack spacing="xs">
+              <Title lh={1} size="sm" color="text-light">
+                {t`Description`}
+              </Title>
+              <EditableDescription
+                collection={collection}
+                handleChangeDescription={handleChangeDescription}
+              />
+            </Stack>
+            {collection.authority_level === "official" && (
               <Group noWrap spacing="sm">
                 <Icon {...iconProps} />
                 <Text lh={1}>{t`Official collection`}</Text>
               </Group>
-            </Stack>
-          </SidesheetCard>
-        )}
+            )}
+          </Stack>
+        </SidesheetCard>
         {collection.entity_id && (
           <EntityIdCard entityId={collection.entity_id} />
         )}
