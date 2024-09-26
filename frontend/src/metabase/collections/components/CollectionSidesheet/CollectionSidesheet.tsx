@@ -1,21 +1,12 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { useMount } from "react-use";
 import { t } from "ttag";
 
 import { Sidesheet, SidesheetCard } from "metabase/common/components/Sidesheet";
 import { EntityIdCard } from "metabase/components/EntityIdCard";
 import EditableText from "metabase/core/components/EditableText";
-import { color } from "metabase/lib/colors";
-import type { ObjectWithModel } from "metabase/lib/icon";
-import { PLUGIN_COLLECTIONS } from "metabase/plugins";
-import {
-  Box,
-  Group,
-  FixedSizeIcon as Icon,
-  Stack,
-  Text,
-  Title,
-} from "metabase/ui";
+import { PLUGIN_COLLECTION_COMPONENTS } from "metabase/plugins";
+import { Box, Stack, Title } from "metabase/ui";
 import type { Collection } from "metabase-types/api";
 
 export const CollectionSidesheet = ({
@@ -36,20 +27,11 @@ export const CollectionSidesheet = ({
     setIsOpen(true);
   });
 
-  const iconProps = useMemo(() => {
-    const icon = PLUGIN_COLLECTIONS.getIcon({
-      ...collection,
-      model: "collection",
-    } as ObjectWithModel);
-    if (icon.color) {
-      icon.color = color(icon.color);
-    }
-    return icon;
-  }, [collection]);
-
   const handleChangeDescription = useCallback(
     (description: string) => {
-      onUpdateCollection(collection, { description: description || null });
+      onUpdateCollection(collection, {
+        description: description.trim() || null,
+      });
     },
     [collection, onUpdateCollection],
   );
@@ -74,12 +56,9 @@ export const CollectionSidesheet = ({
                 handleChangeDescription={handleChangeDescription}
               />
             </Stack>
-            {collection.authority_level === "official" && (
-              <Group noWrap spacing="sm" pb="xs">
-                <Icon {...iconProps} />
-                <Text lh={1}>{t`Official collection`}</Text>
-              </Group>
-            )}
+            <PLUGIN_COLLECTION_COMPONENTS.CollectionAuthorityLevelDisplay
+              collection={collection}
+            />
           </Stack>
         </SidesheetCard>
         {collection.entity_id && (
@@ -97,7 +76,7 @@ const EditableDescription = ({
   collection: Collection;
   handleChangeDescription: (description: string) => void;
 }) => {
-  const description = collection.description;
+  const description = collection.description?.trim() || null;
   const canWrite = collection.can_write;
   return (
     <Box
@@ -113,22 +92,8 @@ const EditableDescription = ({
       isMarkdown
       key={collection.id}
       pos="relative"
-      left={-5}
+      left={-4.5}
       lh={1.38}
-      tabIndex={0}
-      // For a11y, allow typing to activate the textarea
-      onKeyDown={(e: React.KeyboardEvent) => {
-        if (shouldPassKeyToTextarea(e.key)) {
-          (e.currentTarget as HTMLTextAreaElement).click();
-        }
-      }}
-      onKeyUp={(e: React.KeyboardEvent) => {
-        if (!shouldPassKeyToTextarea(e.key)) {
-          (e.currentTarget as HTMLTextAreaElement).click();
-        }
-      }}
     />
   );
 };
-
-const shouldPassKeyToTextarea = (key: string) => key !== "Enter";

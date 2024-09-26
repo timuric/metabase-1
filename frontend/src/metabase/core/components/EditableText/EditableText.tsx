@@ -132,6 +132,18 @@ const EditableText = forwardRef(function EditableText(
       isEditingMarkdown={!shouldShowMarkdown}
       data-value={`${displayValue}\u00A0`}
       data-testid="editable-text"
+      tabIndex={0}
+      // For a11y, allow typing to activate the textarea
+      onKeyDown={(e: React.KeyboardEvent) => {
+        if (shouldPassKeyToTextarea(e.key)) {
+          (e.currentTarget as HTMLTextAreaElement).click();
+        }
+      }}
+      onKeyUp={(e: React.KeyboardEvent) => {
+        if (!shouldPassKeyToTextarea(e.key)) {
+          (e.currentTarget as HTMLTextAreaElement).click();
+        }
+      }}
     >
       {shouldShowMarkdown ? (
         <Markdown>{inputValue}</Markdown>
@@ -151,6 +163,8 @@ const EditableText = forwardRef(function EditableText(
     </EditableTextRoot>
   );
 });
+
+const shouldPassKeyToTextarea = (key: string) => key !== "Enter";
 
 // eslint-disable-next-line import/no-default-export -- deprecated usage
 export default Object.assign(EditableText, { Root: EditableTextRoot });
