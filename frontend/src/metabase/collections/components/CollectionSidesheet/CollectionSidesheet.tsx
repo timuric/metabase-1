@@ -131,5 +131,4 @@ const EditableDescription = ({
   );
 };
 
-/** All keypresses except Enter will be inserted into the textarea */
 const shouldPassKeyToTextarea = (key: string) => key !== "Enter";
