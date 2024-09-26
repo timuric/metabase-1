@@ -47,12 +47,14 @@ export function isInstanceAnalyticsCollection(
 }
 
 export const getIcon = (item: ObjectWithModel): IconData => {
+  console.log("new plugin getIcon");
   if (getCollectionType({ type: item.type }).type === "instance-analytics") {
     return {
       name: INSTANCE_ANALYTICS_COLLECTION.icon,
     };
   }
 
+  console.log("item", item);
   if (
     item.model === "collection" &&
     (item.authority_level === "official" ||

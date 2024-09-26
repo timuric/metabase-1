@@ -60,6 +60,7 @@ export const getIconBase = (item: ObjectWithModel): IconData => {
 };
 
 export const getIcon = (item: ObjectWithModel) => {
+  console.log("old plugin getIcon");
   if (PLUGIN_COLLECTIONS) {
     return PLUGIN_COLLECTIONS.getIcon(item);
   }

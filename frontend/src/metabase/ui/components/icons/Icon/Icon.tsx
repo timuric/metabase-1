@@ -23,6 +23,7 @@ export const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   { name, className, size = defaultSize, tooltip, ...restProps }: IconProps,
   ref,
 ) {
+  console.log("icon restProps", restProps);
   const IconComponent = (Icons[name] ?? Icons["unknown"]).component;
   const validProps = Object.fromEntries(
     Object.entries(restProps).filter(([key]) => isPropValid(key)),
