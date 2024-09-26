@@ -4,7 +4,7 @@ import { SidesheetCard } from "metabase/common/components/Sidesheet";
 import { useDocsUrl } from "metabase/common/hooks";
 import { CopyButton } from "metabase/components/CopyButton";
 import Link from "metabase/core/components/Link";
-import { Flex, Group, Icon, Paper, Popover, Text } from "metabase/ui";
+import { Box, Flex, Group, Icon, Paper, Popover, Text } from "metabase/ui";
 
 const EntityIdTitle = () => {
   const { url: docsLink, showMetabaseLinks } = useDocsUrl(
@@ -50,7 +50,14 @@ export function EntityIdCard({ entityId }: { entityId: string }) {
     <SidesheetCard title={<EntityIdTitle />}>
       <Flex gap="sm" align="end">
         <Text>{entityId}</Text>
-        <CopyButton value={entityId} />
+        <Box
+          component={CopyButton}
+          value={entityId}
+          c="var(--mb-color-text-light)"
+          style={{ cursor: "pointer" }}
+          pos="relative"
+          top={-2}
+        />
       </Flex>
     </SidesheetCard>
   );
