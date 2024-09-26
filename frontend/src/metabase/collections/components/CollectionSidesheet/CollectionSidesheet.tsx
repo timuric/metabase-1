@@ -1,23 +1,24 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useMount } from "react-use";
 import { t } from "ttag";
 
-import Search from "metabase/entities/search";
-
 import { Sidesheet, SidesheetCard } from "metabase/common/components/Sidesheet";
 import { EntityIdCard } from "metabase/components/EntityIdCard";
-import { Group, FixedSizeIcon as Icon, Stack, Text } from "metabase/ui";
-import type { Collection } from "metabase-types/api";
-import { getIcon, type ObjectWithModel } from "metabase/lib/icon";
-import { PLUGIN_COLLECTIONS } from "metabase/plugins";
+import EditableText from "metabase/core/components/EditableText";
 import { color } from "metabase/lib/colors";
+import type { ObjectWithModel } from "metabase/lib/icon";
+import { PLUGIN_COLLECTIONS } from "metabase/plugins";
+import { Box, Group, FixedSizeIcon as Icon, Stack, Text } from "metabase/ui";
+import type { Collection } from "metabase-types/api";
 
 export const CollectionSidesheet = ({
   onClose,
   collection,
+  onUpdateCollection,
 }: {
   onClose: () => void;
   collection: Collection;
+  onUpdateCollection: (entity: Collection, values: Partial<Collection>) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +40,16 @@ export const CollectionSidesheet = ({
     return icon;
   }, [collection]);
 
+  const handleChangeDescription = useCallback(
+    (description: string) => {
+      onUpdateCollection(collection, { description: description || null });
+    },
+    [collection, onUpdateCollection],
+  );
+
+  const description = collection.description;
+  const canWrite = collection.can_write;
+
   return (
     <Sidesheet
       title={t`Info`}
@@ -50,6 +61,24 @@ export const CollectionSidesheet = ({
       <Stack spacing="lg">
         {collection.authority_level === "official" && (
           <SidesheetCard>
+            <Box
+              component={EditableText}
+              pos="relative"
+              left={-5}
+              lh={1.38}
+              key={collection.id}
+              initialValue={collection.description}
+              placeholder={
+                !description && !canWrite
+                  ? t`No description`
+                  : t`Add description`
+              }
+              isDisabled={!canWrite}
+              isOptional
+              isMultiline
+              isMarkdown
+              onChange={handleChangeDescription}
+            />
             <Group noWrap spacing="sm">
               <Icon {...iconProps} />
               <Text lh={1}>{t`Official Collection`}</Text>

@@ -37,7 +37,6 @@ const CollectionBadgeInner = ({
   }
 
   const isRegular = PLUGIN_COLLECTIONS.isRegularCollection(collection);
-  console.log("isRegular", isRegular, collection);
   const icon = {
     ...collection.getIcon(),
     ...(isRegular ? { size: 16 } : IRREGULAR_ICON_PROPS),

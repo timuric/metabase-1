@@ -74,7 +74,10 @@ const CollectionHeader = ({
             onCreateBookmark={onCreateBookmark}
             onDeleteBookmark={onDeleteBookmark}
           />
-          <CollectionSidesheetToggle collection={collection} />
+          <CollectionSidesheetToggle
+            collection={collection}
+            onUpdateCollection={onUpdateCollection}
+          />
           {!isInstanceAnalytics && (
             <CollectionMenu
               collection={collection}
