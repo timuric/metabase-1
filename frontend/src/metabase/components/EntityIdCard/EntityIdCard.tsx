@@ -45,7 +45,7 @@ const EntityIdTitle = () => {
 
 export function EntityIdCard({ entityId }: { entityId: string }) {
   return (
-    <SidesheetCard title={<EntityIdTitle />} pb="22px">
+    <SidesheetCard title={<EntityIdTitle />} pb="1.25rem">
       <Flex gap="sm">
         <Text lh="1rem">{entityId}</Text>
         <CopyButton className={Styles.CopyButton} value={entityId} />
