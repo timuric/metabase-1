@@ -13,7 +13,7 @@ import * as Urls from "metabase/lib/urls";
 import { getUserName } from "metabase/lib/user";
 import { getMetadata } from "metabase/selectors/metadata";
 import { QuestionPublicLinkPopover } from "metabase/sharing/components/PublicLinkPopover";
-import { Box, Flex, FixedSizeIcon as Icon, Text } from "metabase/ui";
+import { Box, Flex, Icon, Text, type TextProps } from "metabase/ui";
 import type Question from "metabase-lib/v1/Question";
 import type { Database } from "metabase-types/api";
 
@@ -98,25 +98,25 @@ function SourceDisplay({ question }: { question: Question }) {
 
   return (
     <SidesheetCardSection title={t`Based on`}>
-      <Flex gap="sm" align="center">
+      <Flex gap="sm" align="flex-start">
         {sourceInfo.db && (
           <>
-            <Text>
+            <SourceText>
               <Link
                 to={`/browse/databases/${sourceInfo.db.id}`}
                 variant="brand"
               >
                 {sourceInfo.db.name}
               </Link>
-            </Text>
-            {"/"}
+            </SourceText>
+            <SourceText>{"/"}</SourceText>
           </>
         )}
-        <Text>
+        <SourceText>
           <Link to={sourceUrl} variant="brand">
             {sourceInfo?.display_name}
           </Link>
-        </Text>
+        </SourceText>
       </Flex>
     </SidesheetCardSection>
   );
@@ -167,3 +167,7 @@ function SharingDisplay({ question }: { question: Question }) {
     </SidesheetCardSection>
   );
 }
+
+const SourceText = (props: TextProps) => (
+  <Text lh="1.25rem" maw="16rem" {...props} />
+);

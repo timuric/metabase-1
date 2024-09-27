@@ -17,7 +17,7 @@ import * as Urls from "metabase/lib/urls";
 import { PLUGIN_MODERATION } from "metabase/plugins";
 import { onCloseQuestionInfo } from "metabase/query_builder/actions";
 import { QuestionActivityTimeline } from "metabase/query_builder/components/QuestionActivityTimeline";
-import { Stack, Tabs } from "metabase/ui";
+import { Stack, Tabs, Title } from "metabase/ui";
 import type Question from "metabase-lib/v1/Question";
 
 import { QuestionDetails } from "./QuestionDetails";
@@ -77,12 +77,17 @@ export const QuestionInfoSidebar = ({
         <SidesheetTabPanelContainer>
           <Tabs.Panel value="overview">
             <Stack spacing="lg">
-              <SidesheetCard title={t`Description`}>
-                <SidesheetEditableDescription
-                  description={description}
-                  onChange={handleSave}
-                  canWrite={canWrite}
-                />
+              <SidesheetCard>
+                <Stack spacing="sm">
+                  <Title lh={1} size="sm" color="var(--mb-color-text-light)">
+                    {t`Description`}
+                  </Title>
+                  <SidesheetEditableDescription
+                    description={description}
+                    onChange={handleSave}
+                    canWrite={canWrite}
+                  />
+                </Stack>
                 <PLUGIN_MODERATION.ModerationReviewText question={question} />
                 {question.type() === "model" && !question.isArchived() && (
                   <Link
@@ -91,7 +96,7 @@ export const QuestionInfoSidebar = ({
                   >{t`See more about this model`}</Link>
                 )}
               </SidesheetCard>
-              <SidesheetCard>
+              <SidesheetCard stackProps={{ spacing: "lg" }}>
                 <QuestionDetails question={question} />
               </SidesheetCard>
               <EntityIdCard entityId={question._card.entity_id} />
