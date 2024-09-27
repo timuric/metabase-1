@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { t } from "ttag";
 
-import { useCallOnEnter } from "metabase/common/utils/keyboard";
+import { isPlainKey } from "metabase/common/utils/keyboard";
 import Styles from "metabase/css/core/index.css";
 import { Icon, Text, Tooltip } from "metabase/ui";
 
@@ -31,7 +31,14 @@ export const CopyButton = ({
     onCopy?.();
   }, [onCopy]);
 
-  const copyOnEnter = useCallOnEnter<SVGElement>(onCopyValue);
+  const copyOnEnter = useCallback(
+    (e: React.KeyboardEvent<SVGElement>) => {
+      if (isPlainKey(e, "Enter")) {
+        onCopyValue();
+      }
+    },
+    [onCopyValue],
+  );
 
   return (
     <CopyToClipboard text={value} onCopy={onCopyValue}>
