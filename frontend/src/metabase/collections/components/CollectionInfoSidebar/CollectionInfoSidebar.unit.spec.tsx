@@ -31,10 +31,14 @@ const setup = ({
 describe("CollectionInfoSidebar", () => {
   const regularCollection = createMockCollection({
     name: "Normal collection",
+    description: "Description of a normal collection",
+    entity_id: "entity_id_of_normal_collection",
     authority_level: null,
   });
   const officialCollection = createMockCollection({
     name: "Trusted collection",
+    description: "Description of a trusted collection",
+    entity_id: "entity_id_of_trusted_collection",
     authority_level: "official",
   });
   describe("with official collections disabled", () => {
@@ -44,6 +48,12 @@ describe("CollectionInfoSidebar", () => {
         enableOfficialCollections: false,
       });
       expect(await screen.findByText("Normal collection")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Description of a normal collection"),
+      ).toBeInTheDocument();
+      expect(
+        await screen.findByText("entity_id_of_normal_collection"),
+      ).toBeInTheDocument();
       expect(screen.queryByText("Official collection")).not.toBeInTheDocument();
     });
     it("should render properly for an official collection", async () => {
@@ -52,6 +62,12 @@ describe("CollectionInfoSidebar", () => {
         enableOfficialCollections: false,
       });
       expect(await screen.findByText("Trusted collection")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Description of a trusted collection"),
+      ).toBeInTheDocument();
+      expect(
+        await screen.findByText("entity_id_of_trusted_collection"),
+      ).toBeInTheDocument();
       expect(screen.queryByText("Official collection")).not.toBeInTheDocument();
     });
   });
@@ -62,6 +78,12 @@ describe("CollectionInfoSidebar", () => {
       expect(
         await screen.findByText(regularCollection.name),
       ).toBeInTheDocument();
+      expect(
+        await screen.findByText("Description of a normal collection"),
+      ).toBeInTheDocument();
+      expect(
+        await screen.findByText("entity_id_of_normal_collection"),
+      ).toBeInTheDocument();
       expect(screen.queryByText("Official collection")).not.toBeInTheDocument();
     });
 
@@ -71,6 +93,12 @@ describe("CollectionInfoSidebar", () => {
         enableOfficialCollections: true,
       });
       expect(await screen.findByText("Trusted collection")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Description of a trusted collection"),
+      ).toBeInTheDocument();
+      expect(
+        await screen.findByText("entity_id_of_trusted_collection"),
+      ).toBeInTheDocument();
       expect(
         await screen.findByText("Official collection"),
       ).toBeInTheDocument();
