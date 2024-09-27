@@ -8,9 +8,9 @@ import {
   SidesheetCard,
   SidesheetTabPanelContainer,
 } from "metabase/common/components/Sidesheet";
+import { SidesheetEditableDescription } from "metabase/common/components/Sidesheet/components/SidesheetEditableDescription";
 import SidesheetStyles from "metabase/common/components/Sidesheet/sidesheet.module.css";
 import { EntityIdCard } from "metabase/components/EntityIdCard";
-import EditableText from "metabase/core/components/EditableText";
 import Link from "metabase/core/components/Link";
 import { useDispatch } from "metabase/lib/redux";
 import * as Urls from "metabase/lib/urls";
@@ -21,7 +21,6 @@ import { Stack, Tabs } from "metabase/ui";
 import type Question from "metabase-lib/v1/Question";
 
 import { QuestionDetails } from "./QuestionDetails";
-import Styles from "./QuestionInfoSidebar.module.css";
 
 interface QuestionInfoSidebarProps {
   question: Question;
@@ -79,21 +78,11 @@ export const QuestionInfoSidebar = ({
           <Tabs.Panel value="overview">
             <Stack spacing="lg">
               <SidesheetCard title={t`Description`}>
-                <div className={Styles.EditableTextContainer}>
-                  <EditableText
-                    initialValue={description}
-                    placeholder={
-                      !description && !canWrite
-                        ? t`No description`
-                        : t`Add description`
-                    }
-                    isOptional
-                    isMultiline
-                    isMarkdown
-                    isDisabled={!canWrite}
-                    onChange={handleSave}
-                  />
-                </div>
+                <SidesheetEditableDescription
+                  description={description}
+                  onChange={handleSave}
+                  canWrite={canWrite}
+                />
                 <PLUGIN_MODERATION.ModerationReviewText question={question} />
                 {question.type() === "model" && !question.isArchived() && (
                   <Link

@@ -3,13 +3,13 @@ import { useMount } from "react-use";
 import { t } from "ttag";
 
 import { Sidesheet, SidesheetCard } from "metabase/common/components/Sidesheet";
+import { SidesheetEditableDescription } from "metabase/common/components/Sidesheet/components/SidesheetEditableDescription";
 import { EntityIdCard } from "metabase/components/EntityIdCard";
-import EditableText from "metabase/core/components/EditableText";
 import { PLUGIN_COLLECTION_COMPONENTS } from "metabase/plugins";
-import { Box, Stack, Title } from "metabase/ui";
+import { Stack, Title } from "metabase/ui";
 import type { Collection } from "metabase-types/api";
 
-export const CollectionSidesheet = ({
+export const CollectionInfoSidebar = ({
   onClose,
   collection,
   onUpdateCollection,
@@ -35,6 +35,8 @@ export const CollectionSidesheet = ({
     },
     [collection, onUpdateCollection],
   );
+  const description = collection.description?.trim() || null;
+  const canWrite = collection.can_write;
 
   return (
     <Sidesheet
@@ -45,15 +47,16 @@ export const CollectionSidesheet = ({
       onClose={onClose}
     >
       <Stack spacing="lg">
-        <SidesheetCard pb="lg">
+        <SidesheetCard pb="md">
           <Stack spacing="md">
             <Stack spacing="xs">
               <Title lh={1} size="sm" color="text-light">
                 {t`Description`}
               </Title>
-              <EditableDescription
-                collection={collection}
-                handleChangeDescription={handleChangeDescription}
+              <SidesheetEditableDescription
+                description={description}
+                onChange={handleChangeDescription}
+                canWrite={canWrite}
               />
             </Stack>
             <PLUGIN_COLLECTION_COMPONENTS.CollectionAuthorityLevelDisplay
@@ -66,34 +69,5 @@ export const CollectionSidesheet = ({
         )}
       </Stack>
     </Sidesheet>
-  );
-};
-
-const EditableDescription = ({
-  collection,
-  handleChangeDescription,
-}: {
-  collection: Collection;
-  handleChangeDescription: (description: string) => void;
-}) => {
-  const description = collection.description?.trim() || null;
-  const canWrite = collection.can_write;
-  return (
-    <Box
-      component={EditableText}
-      onChange={handleChangeDescription}
-      initialValue={description}
-      placeholder={
-        !description && !canWrite ? t`No description` : t`Add description`
-      }
-      isDisabled={!canWrite}
-      isOptional
-      isMultiline
-      isMarkdown
-      key={collection.id}
-      pos="relative"
-      left={-4.5}
-      lh={1.38}
-    />
   );
 };

@@ -3,11 +3,11 @@ import { useState } from "react";
 import { FixedSizeIcon as Icon } from "metabase/ui";
 import type { Collection } from "metabase-types/api";
 
-import { CollectionSidesheet } from "../CollectionSidesheet/CollectionSidesheet";
+import { CollectionInfoSidebar } from "../CollectionInfoSidebar";
 
 import { CollectionHeaderButton } from "./CollectionHeader.styled";
 
-export const CollectionSidesheetToggle = ({
+export const CollectionInfoSidebarToggle = ({
   collection,
   onUpdateCollection,
 }: {
@@ -21,7 +21,7 @@ export const CollectionSidesheetToggle = ({
         <Icon name="info" />
       </CollectionHeaderButton>
       {showSidesheet && (
-        <CollectionSidesheet
+        <CollectionInfoSidebar
           onClose={() => setShowSidesheet(false)}
           collection={collection}
           onUpdateCollection={onUpdateCollection}

@@ -68,14 +68,12 @@ export const CollectionCaption = ({
             // description is modified in another component
             `${collection.id}-${collection.description}`
           }
-          initialValue={collection.description}
+          description={collection.description}
           placeholder={t`Add description`}
           isVisible={Boolean(collection.description)}
-          isDisabled={!isEditable}
-          isOptional
-          isMultiline
-          isMarkdown
+          canWrite={isEditable}
           onChange={handleChangeDescription}
+          left={0}
         />
       )}
     </CaptionRoot>

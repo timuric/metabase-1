@@ -11,6 +11,7 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { usePrevious } from "react-use";
 
 import Markdown from "metabase/core/components/Markdown";
+import { Box } from "metabase/ui";
 
 import { EditableTextArea, EditableTextRoot } from "./EditableText.styled";
 
@@ -123,7 +124,8 @@ const EditableText = forwardRef(function EditableText(
   const shouldShowMarkdown = isMarkdown && !isInFocus && inputValue;
 
   return (
-    <EditableTextRoot
+    <Box
+      component={EditableTextRoot}
       onClick={isMarkdown ? handleRootElementClick : undefined}
       {...props}
       ref={ref}
@@ -144,6 +146,7 @@ const EditableText = forwardRef(function EditableText(
           (e.currentTarget as HTMLTextAreaElement).click();
         }
       }}
+      lh={1.57}
     >
       {shouldShowMarkdown ? (
         <Markdown>{inputValue}</Markdown>
@@ -160,7 +163,7 @@ const EditableText = forwardRef(function EditableText(
           onKeyDown={handleKeyDown}
         />
       )}
-    </EditableTextRoot>
+    </Box>
   );
 });
 
