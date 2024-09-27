@@ -99,8 +99,6 @@ export function renderWithProviders(
   let { routing, ...initialState }: Partial<State> =
     createMockState(storeInitialState);
 
-  console.log("initialState", initialState);
-
   if (mode === "public") {
     const publicReducerNames = Object.keys(publicReducers);
     initialState = _.pick(initialState, ...publicReducerNames) as State;
