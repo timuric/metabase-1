@@ -66,8 +66,8 @@ const EntityIdTitle = () => {
 export function EntityIdCard({ entityId }: { entityId: string }) {
   return (
     <SidesheetCard title={<EntityIdTitle />}>
-      <Flex gap="sm" align="end">
-        <Text>{entityId}</Text>
+      <Flex gap="sm">
+        <Text lh={1}>{entityId}</Text>
         <CopyButton className={Styles.CopyButton} value={entityId} />
       </Flex>
     </SidesheetCard>

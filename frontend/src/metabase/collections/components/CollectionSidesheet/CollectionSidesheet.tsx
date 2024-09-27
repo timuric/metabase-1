@@ -45,7 +45,7 @@ export const CollectionSidesheet = ({
       onClose={onClose}
     >
       <Stack spacing="lg">
-        <SidesheetCard pb="md">
+        <SidesheetCard pb="lg">
           <Stack spacing="md">
             <Stack spacing="xs">
               <Title lh={1} size="sm" color="text-light">

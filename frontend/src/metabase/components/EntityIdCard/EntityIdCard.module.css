@@ -1,8 +1,9 @@
 .CopyButton {
   cursor: pointer;
   position: relative;
-  top: -2px;
+  top: -1px;
   color: var(--mb-color-text-light);
+  line-height: 1rem;
 
   &:hover {
     color: var(--mb-color-brand);
