@@ -169,7 +169,7 @@ const OverviewTab = ({
           </Text>
         )}
       </SidesheetCard>
-      <SidesheetCard>
+      <SidesheetCard pb="1.25rem">
         <DashboardDetails dashboard={dashboard} />
       </SidesheetCard>
       <EntityIdCard entityId={dashboard.entity_id} />

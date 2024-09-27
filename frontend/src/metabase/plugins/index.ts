@@ -5,6 +5,7 @@ import type {
   ReactNode,
   SetStateAction,
 } from "react";
+import type { InjectedRouter, Route } from "react-router";
 import { t } from "ttag";
 import _ from "underscore";
 import type { AnySchema } from "yup";
@@ -334,6 +335,7 @@ export type CollectionAuthorityLevelIcon = ComponentType<
     collection: Pick<Collection, "authority_level">;
     tooltip?: "default" | "belonging";
     archived?: boolean;
+    showIconForRegularCollection?: boolean;
   }
 >;
 
@@ -407,6 +409,8 @@ export type SidebarCacheFormProps = {
   item: CacheableDashboard | Question;
   model: CacheableModel;
   onClose: () => void;
+  router?: InjectedRouter;
+  route?: Route;
 } & GroupProps;
 
 export const PLUGIN_CACHING = {
