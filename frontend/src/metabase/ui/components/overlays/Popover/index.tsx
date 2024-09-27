@@ -1,5 +1,6 @@
 import type { PopoverDropdownProps } from "@mantine/core";
 import { Popover as MantinePopover } from "@mantine/core";
+import cx from "classnames";
 import { useEffect } from "react";
 
 export type { PopoverBaseProps, PopoverProps } from "@mantine/core";
@@ -39,6 +40,13 @@ MantinePopover.Dropdown = PopoverDropdown;
 const Popover: typeof MantinePopover & {
   Dropdown: typeof PopoverDropdown;
 } = MantinePopover;
+
+// const injectStyles = (styles: Record<string, string>, component: React.FC) => {
+//   const className = styles[component.displayName];
+//   if (className) {
+//     component.defaultProps.className = cx(component.defaultProps.className, className);
+//   }
+// }
 
 export { Popover };
 export { DEFAULT_POPOVER_Z_INDEX } from "./Popover.styled";

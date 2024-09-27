@@ -1,11 +1,11 @@
-import type { EmotionCache } from "@emotion/react";
-import { withEmotionCache } from "@emotion/react";
-import type { MantineThemeOverride } from "@mantine/core";
-import { MantineProvider } from "@mantine/core";
+import { ThemeProvider as _CompatibilityEmotionThemeProvider } from "@emotion/react";
+import type { MantineTheme, MantineThemeOverride } from "@mantine/core";
+import { MantineProvider, createTheme } from "@mantine/core";
 import { merge } from "icepick";
 import { type ReactNode, useMemo } from "react";
 
 import { getThemeOverrides } from "../../../theme";
+import { themeColor } from "../../../utils/colors";
 import { DatesProvider } from "../DatesProvider";
 
 interface ThemeProviderProps {
@@ -19,17 +19,28 @@ interface ThemeProviderProps {
   theme?: MantineThemeOverride;
 }
 
-export const ThemeProvider = withEmotionCache(
-  (props: ThemeProviderProps, cache: EmotionCache) => {
+export const ThemeProvider =
+  (props: ThemeProviderProps, ) => {
     // Merge default theme overrides with user-provided theme overrides
     const theme = useMemo(() => {
-      return merge(getThemeOverrides(), props.theme);
+      const theme = merge(
+        getThemeOverrides(),
+        props.theme,
+      ) as MantineTheme;
+
+      return {
+        ...theme,
+        fn: {
+          themeColor: (colorName: string) => themeColor(colorName, theme),
+        },
+       } as MantineTheme;
     }, [props.theme]);
 
     return (
-      <MantineProvider theme={theme} emotionCache={cache}>
-        <DatesProvider>{props.children}</DatesProvider>
+      <MantineProvider theme={theme}>
+        <_CompatibilityEmotionThemeProvider theme={theme}>
+          <DatesProvider>{props.children}</DatesProvider>
+        </_CompatibilityEmotionThemeProvider>
       </MantineProvider>
     );
-  },
-);
+  };

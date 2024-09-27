@@ -3,7 +3,7 @@ import { getIn } from "icepick";
 
 import type { MetabaseComponentTheme } from "embedding-sdk";
 import { SDK_TO_MAIN_APP_COLORS_MAPPING } from "embedding-sdk/lib/theme/embedding-color-palette";
-import type { MantineTheme } from "metabase/ui";
+import type { MantineTheme, getThemeColor } from "metabase/ui";
 
 // https://www.raygesualdo.com/posts/flattening-object-keys-with-typescript-types/
 type FlattenObjectKeys<
@@ -26,9 +26,9 @@ export function getMetabaseCssVariables(theme: MantineTheme) {
       --mb-default-font-family: "${theme.fontFamily}";
 
       /* Semantic colors */
-      --mb-color-brand: ${theme.fn.themeColor("brand")};
-      --mb-color-summarize: ${theme.fn.themeColor("summarize")};
-      --mb-color-filter: ${theme.fn.themeColor("filter")};
+      --mb-color-brand: ${theme.colors.brand[0]};
+      --mb-color-summarize: ${theme.colors.summarize[0]};
+      --mb-color-filter: ${theme.colors.summarize[0]};
       ${getThemeSpecificCssVariables(theme)}
     }
   `;

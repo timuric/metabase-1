@@ -1,4 +1,4 @@
-import { Global } from "@emotion/react";
+import {Global } from "@emotion/react";
 import { useMemo } from "react";
 
 import type { MetabaseTheme } from "embedding-sdk";
@@ -35,8 +35,8 @@ export const SdkThemeProvider = ({ theme, children }: Props) => {
 
   return (
     <ThemeProvider theme={themeOverride}>
-      <GlobalSdkCssVariables />
-      {children}
+        <GlobalSdkCssVariables />
+        {children}
     </ThemeProvider>
   );
 };

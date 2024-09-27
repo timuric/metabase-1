@@ -2,6 +2,8 @@ import { type Theme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { getDashboardBodyBgColor } from "metabase/dashboard/components/Dashboard/Dashboard.styled";
+import { color } from "metabase/ui";
+
 
 export interface DashCardRootProps {
   isNightMode: boolean;

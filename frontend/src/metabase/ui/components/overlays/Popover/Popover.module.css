@@ -1,0 +1,10 @@
+:root {
+  .dropdown {
+    padding: 0;
+    overflow: auto;
+    /* background: var(--mb-color-background); */
+    background-color: red;
+    border-color: var(--mb-color-border);
+    color: var(--mb-color-text-primary);
+  }
+}
