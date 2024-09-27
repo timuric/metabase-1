@@ -72,9 +72,6 @@ if (hasPremiumFeature("official_collections")) {
   PLUGIN_COLLECTION_COMPONENTS.CollectionAuthorityLevelIcon =
     CollectionAuthorityLevelIcon;
 
-  PLUGIN_COLLECTION_COMPONENTS.CollectionAuthorityLevelIcon =
-    CollectionAuthorityLevelIcon;
-
   PLUGIN_COLLECTION_COMPONENTS.CollectionAuthorityLevelDisplay =
     CollectionAuthorityLevelDisplay;
 }
