@@ -1,5 +1,4 @@
 import type {
-  ChangeEvent,
   FocusEvent,
   FocusEventHandler,
   HTMLAttributes,
@@ -58,6 +57,8 @@ const EditableText = forwardRef(function EditableText(
   const submitOnBlur = useRef(true);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const previousInitialValue = usePrevious(initialValue);
+
+  console.log("@m1ojot88", "previousInitialValue", previousInitialValue);
 
   useEffect(() => {
     if (initialValue && initialValue !== previousInitialValue) {
