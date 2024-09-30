@@ -19,28 +19,24 @@ interface ThemeProviderProps {
   theme?: MantineThemeOverride;
 }
 
-export const ThemeProvider =
-  (props: ThemeProviderProps, ) => {
-    // Merge default theme overrides with user-provided theme overrides
-    const theme = useMemo(() => {
-      const theme = merge(
-        getThemeOverrides(),
-        props.theme,
-      ) as MantineTheme;
+export const ThemeProvider = (props: ThemeProviderProps) => {
+  // Merge default theme overrides with user-provided theme overrides
+  const theme = useMemo(() => {
+    const theme = createTheme(merge(getThemeOverrides(), props.theme));
 
-      return {
-        ...theme,
-        fn: {
-          themeColor: (colorName: string) => themeColor(colorName, theme),
-        },
-       } as MantineTheme;
-    }, [props.theme]);
+    return {
+      ...theme,
+      fn: {
+        themeColor: (colorName: string) => themeColor(colorName, theme),
+      },
+    } as MantineTheme;
+  }, [props.theme]);
 
-    return (
-      <MantineProvider theme={theme}>
-        <_CompatibilityEmotionThemeProvider theme={theme}>
-          <DatesProvider>{props.children}</DatesProvider>
-        </_CompatibilityEmotionThemeProvider>
-      </MantineProvider>
-    );
-  };
+  return (
+    <MantineProvider theme={theme}>
+      <_CompatibilityEmotionThemeProvider theme={theme}>
+        <DatesProvider>{props.children}</DatesProvider>
+      </_CompatibilityEmotionThemeProvider>
+    </MantineProvider>
+  );
+};

@@ -1,47 +1,47 @@
-import type { MantineThemeOverride } from "@mantine/core";
+import type { MantineThemeProviderProps } from "@mantine/core";
 import { rem } from "@mantine/core";
 
 import { DEFAULT_METABASE_COMPONENT_THEME } from "embedding-sdk/lib/theme";
 
-// import {
-//   getAccordionOverrides,
-//   getActionIconOverrides,
-//   getAlertOverrides,
-//   getAnchorOverrides,
-//   getAutocompleteOverrides,
-//   getButtonOverrides,
-//   getCalendarOverrides,
-//   getCardOverrides,
-//   getCheckboxOverrides,
-//   getChipOverrides,
-//   getDateInputOverrides,
-//   getDatePickerOverrides,
-//   getDividerOverrides,
-//   getFileInputOverrides,
-//   getHoverCardOverrides,
-//   getInputOverrides,
-//   getListOverrides,
-//   getMenuOverrides,
-//   getModalOverrides,
-//   getMultiSelectOverrides,
-//   getNavLinkOverrides,
-//   getPaperOverrides,
-//   getPopoverOverrides,
-//   getProgressOverrides,
-//   getRadioOverrides,
-//   getScrollAreaOverrides,
-//   getSegmentedControlOverrides,
-//   getSelectOverrides,
-//   getSkeletonOverrides,
-//   getSwitchOverrides,
-//   getTabsOverrides,
-//   getTextInputOverrides,
-//   getTextOverrides,
-//   getTextareaOverrides,
-//   getTimeInputOverrides,
-//   getTitleOverrides,
-//   getTooltipOverrides,
-// } from "./components";
+import {
+  //   getAccordionOverrides,
+  //   getActionIconOverrides,
+  //   getAlertOverrides,
+  //   getAnchorOverrides,
+  //   getAutocompleteOverrides,
+  //   getButtonOverrides,
+  //   getCalendarOverrides,
+  //   getCardOverrides,
+  //   getCheckboxOverrides,
+  //   getChipOverrides,
+  //   getDateInputOverrides,
+  //   getDatePickerOverrides,
+  //   getDividerOverrides,
+  //   getFileInputOverrides,
+  //   getHoverCardOverrides,
+  //   getInputOverrides,
+  //   getListOverrides,
+  //   getMenuOverrides,
+  //   getModalOverrides,
+  //   getMultiSelectOverrides,
+  //   getNavLinkOverrides,
+  //   getPaperOverrides,
+  getPopoverOverrides,
+  //   getProgressOverrides,
+  //   getRadioOverrides,
+  //   getScrollAreaOverrides,
+  //   getSegmentedControlOverrides,
+  //   getSelectOverrides,
+  //   getSkeletonOverrides,
+  //   getSwitchOverrides,
+  //   getTabsOverrides,
+  //   getTextInputOverrides,
+  //   getTextOverrides,
+  //   getTextareaOverrides,
+  //   getTimeInputOverrides,
+  //   getTitleOverrides,
+  //   getTooltipOverrides,
+} from "./components";
 import { getThemeColors } from "./utils/colors";
 
 export const breakpoints = {
@@ -53,7 +53,7 @@ export const breakpoints = {
 };
 export type BreakpointName = keyof typeof breakpoints;
 
-export const getThemeOverrides = (): MantineThemeOverride => ({
+export const getThemeOverrides = (): MantineThemeProviderProps["theme"] => ({
   breakpoints,
   colors: getThemeColors(),
   primaryColor: "brand",
@@ -113,7 +113,7 @@ export const getThemeOverrides = (): MantineThemeOverride => ({
   //   outline: `0.125rem solid ${color("brand")}`,
   //   outlineOffset: "0.125rem",
   // }),
-  focusRing: 'auto',
+  focusRing: "auto",
   components: {
     // ...getAccordionOverrides(),
     // ...getActionIconOverrides(),
@@ -136,7 +136,7 @@ export const getThemeOverrides = (): MantineThemeOverride => ({
     // ...getNavLinkOverrides(),
     // ...getRadioOverrides(),
     // ...getPaperOverrides(),
-    // ...getPopoverOverrides(),
+    ...getPopoverOverrides(),
     // ...getProgressOverrides(),
     // ...getSkeletonOverrides(),
     // ...getScrollAreaOverrides(),
